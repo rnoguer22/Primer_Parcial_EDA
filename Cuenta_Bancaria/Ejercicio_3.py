@@ -24,15 +24,17 @@ class Cuenta_Bancaria:
         else:
             print ("No se pudo retirar dinero :(")
 
-    def ingresar(self):
-        dinero_ingresar = 350
+    def ingresar(self, dinero_ingresar):
         self.saldo += dinero_ingresar
+        print ("Ha ingresado {}€. Su saldo actual es de {}€".format(dinero_ingresar, self.saldo))
 
-    def transferir(self, dinero_transferir):
+    def transferir(self, dinero_transferir, cuenta_a_transferir):
         if self.puede_retirar_o_transferir(dinero_transferir):
-            "Aqui realizaremos la transferencia"
+            self.saldo -= dinero_transferir
+            cuenta_a_transferir.saldo += dinero_transferir
+            print ("Se han transferido {}€ de {} a {}".format(dinero_transferir,Cuenta_Bancaria, cuenta_a_transferir))
         else:
-            print ("No se pudo retirar dinero")
+            print ("No se pudo transferir el dinero")
 
 class Plazo_Fijo(Cuenta_Bancaria):
     #Esta clase es heredada de Cuenta_Bancaria
@@ -66,8 +68,8 @@ class Plazo_Fijo(Cuenta_Bancaria):
     def ingresar_dinero(self, dinero):
         Cuenta_Bancaria.ingresar(dinero)
     
-    def transferir_dinero(self, dinero):
-        Cuenta_Bancaria.transferir(dinero)
+    def transferir_dinero(self, dinero, cuenta_a_transferir):
+        Cuenta_Bancaria.transferir(dinero, cuenta_a_transferir)
 
 class Cuenta_Vip(Plazo_Fijo):
     #Definimos el constructor
@@ -88,5 +90,20 @@ class Cuenta_Vip(Plazo_Fijo):
     def ingresar_dinero_vip(self, dinero):
         Cuenta_Bancaria.ingresar(dinero)
     
-    def transferir_dinero(self, dinero):
-        Cuenta_Bancaria.transferir(dinero)
+    def transferir_dinero(self, dinero, cuenta_a_transferir):
+        Cuenta_Bancaria.transferir(dinero, cuenta_a_transferir)
+
+
+#Definimos las instancias de clases
+cuenta_bancaria = Cuenta_Bancaria (1, "Ruben", 9, 10, 10000)
+cuenta_plazo_fijo = Plazo_Fijo (2, "Moyis", 3, 5, 10000)   #Eliminamos los randint que pueden dar problemas si coinciden
+cuenta_vip = Cuenta_Vip (3, "Malaguita", 7, 3, 10000, -500)
+
+#Realizamos una transferencia
+cuenta_plazo_fijo.transferir_dinero(2000, cuenta_vip)
+
+#Realizamos un ingreso de dinero
+cuenta_bancaria.ingresar(575)
+
+#Realizamos una retirada de dinero
+cuenta_vip.retirar_dinero_vip(78)

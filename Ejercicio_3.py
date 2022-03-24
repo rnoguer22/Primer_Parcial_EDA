@@ -56,6 +56,11 @@ class Plazo_Fijo(Cuenta_Bancaria):
             self.saldo -= retiro
         else:
             self.saldo -= dinero
+
+        #Nos aseguramos que el saldo de este tipo de cuenta no puede ser menor que cero
+        if self.saldo <= 0:
+            self.saldo = 0
+        else: pass
         print ("Su saldo restante es {}€".format(self.saldo))
 
     def ingresar_dinero(self, dinero):
@@ -70,3 +75,12 @@ class Cuenta_Vip(Plazo_Fijo):
         super().__init__(id_cuenta, nombre, fecha_apertura, num_cuenta, saldo)
         #Agregamos el nuevo atributo
         self.saldo_negativo_max = saldo_negativo_max
+    
+    def retirar_dinero_vip(self, dinero):
+        Cuenta_Bancaria.retirar(dinero)
+        #De la siguiente manera nos aseguramos que el saldo no sea inferior que el valor minimo negativo
+        if self.saldo < self.saldo_negativo_max:
+            self.saldo = self.saldo_negativo_max
+            print ("Su saldo ha alcanzado su valor negativo maximo, {}€".format(self.saldo))
+        else:
+            pass

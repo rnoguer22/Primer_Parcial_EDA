@@ -16,18 +16,18 @@ class Cuenta_Bancaria:
             print ("La operacion se ha ralizado correctamente")
             return True
 
-    def retirar_dinero(self):
+    def retirar(self):
         dinero_retirar = 70
         if self.puede_retirar_o_transferir(dinero_retirar):
             self.saldo -= dinero_retirar
         else:
             print ("No se pudo retirar dinero :(")
 
-    def ingresar_dinero(self):
+    def ingresar(self):
         dinero_ingresar = 350
         self.saldo += dinero_ingresar
 
-    def transferir_dinero(self):
+    def transferir(self):
         dinero_transferir = 200
         if self.puede_retirar_o_transferir(dinero_transferir):
             "Aqui realizaremos la transferencia"
@@ -39,3 +39,25 @@ class Plazo_Fijo(Cuenta_Bancaria):
     def __init__(self, id_cuenta, nombre, fecha_apertura, num_cuenta, saldo):
         super().__init__(id_cuenta, nombre, fecha_apertura, num_cuenta, saldo)
     
+    def retirar_dinero(self, dinero):
+
+        #Funcion para calcular la pena por vencimiento
+        def penalizacion(money):
+            money += 0.05*money
+            return money
+
+        Cuenta_Bancaria.retirar(dinero)
+        vencimiento = self.fecha_apertura + 9   #Damos 9 meses de vencimiento
+        fecha_retirar = 13
+        #Condicional para hallar el saldo que nos queda
+        if fecha_retirar < vencimiento:
+            retiro = penalizacion(dinero)
+            self.saldo -= retiro
+        else:
+            self.saldo -= dinero
+
+    def ingresar_dinero(self, dinero):
+        Cuenta_Bancaria.ingresar(dinero)
+    
+    def transferir_dinero(self, dinero):
+        Cuenta_Bancaria.transferir(dinero)

@@ -33,3 +33,9 @@ class Cuenta_Bancaria:
             "Aqui realizaremos la transferencia"
         else:
             print ("No se pudo retirar dinero")
+
+class Plazo_Fijo(Cuenta_Bancaria):
+    #Esta clase es heredada de Cuenta_Bancaria
+    def __init__(self, id_cuenta, nombre, fecha_apertura, num_cuenta, saldo):
+        super().__init__(id_cuenta, nombre, fecha_apertura, num_cuenta, saldo)
+    

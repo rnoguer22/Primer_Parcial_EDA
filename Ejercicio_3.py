@@ -18,10 +18,18 @@ class Cuenta_Bancaria:
 
     def retirar_dinero(self):
         dinero_retirar = 70
-        self.saldo -= dinero_retirar
+        if self.puede_retirar_o_transferir(dinero_retirar):
+            self.saldo -= dinero_retirar
+        else:
+            print ("No se pudo retirar dinero :(")
 
     def ingresar_dinero(self):
         dinero_ingresar = 350
         self.saldo += dinero_ingresar
 
     def transferir_dinero(self):
+        dinero_transferir = 200
+        if self.puede_retirar_o_transferir(dinero_transferir):
+            "Aqui realizaremos la transferencia"
+        else:
+            print ("No se pudo retirar dinero")

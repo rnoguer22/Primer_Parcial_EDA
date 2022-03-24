@@ -49,15 +49,24 @@ class Plazo_Fijo(Cuenta_Bancaria):
         Cuenta_Bancaria.retirar(dinero)
         vencimiento = self.fecha_apertura + 9   #Damos 9 meses de vencimiento
         fecha_retirar = 13
+
         #Condicional para hallar el saldo que nos queda
         if fecha_retirar < vencimiento:
             retiro = penalizacion(dinero)
             self.saldo -= retiro
         else:
             self.saldo -= dinero
+        print ("Su saldo restante es {}€".format(self.saldo))
 
     def ingresar_dinero(self, dinero):
         Cuenta_Bancaria.ingresar(dinero)
     
     def transferir_dinero(self, dinero):
         Cuenta_Bancaria.transferir(dinero)
+
+class Cuenta_Vip(Plazo_Fijo):
+    #Definimos el constructor
+    def __init__(self, id_cuenta, nombre, fecha_apertura, num_cuenta, saldo, saldo_negativo_max):
+        super().__init__(id_cuenta, nombre, fecha_apertura, num_cuenta, saldo)
+        #Agregamos el nuevo atributo
+        self.saldo_negativo_max = saldo_negativo_max

@@ -7,6 +7,15 @@ class Cuenta_Bancaria:
         self.num_cuenta = num_cuenta
         self.saldo = saldo
 
+    #Funcion para saber si podemos retirar o transferir dinero
+    def puede_retirar_o_transferir(self, dinero):
+        if dinero > self.saldo:
+            print ("No se pudo realizar la operacion")
+            return False
+        else:
+            print ("La operacion se ha ralizado correctamente")
+            return True
+
     def retirar_dinero(self):
         dinero_retirar = 70
         self.saldo -= dinero_retirar

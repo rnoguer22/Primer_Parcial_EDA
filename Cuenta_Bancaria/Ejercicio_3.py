@@ -1,3 +1,5 @@
+from random import randint
+
 class Cuenta_Bancaria:
     #Constructor
     def __init__(self, id_cuenta, nombre, fecha_apertura, num_cuenta, saldo):
@@ -16,8 +18,7 @@ class Cuenta_Bancaria:
             print ("La operacion se ha ralizado correctamente")
             return True
 
-    def retirar(self):
-        dinero_retirar = 70
+    def retirar(self, dinero_retirar):
         if self.puede_retirar_o_transferir(dinero_retirar):
             self.saldo -= dinero_retirar
         else:
@@ -27,8 +28,7 @@ class Cuenta_Bancaria:
         dinero_ingresar = 350
         self.saldo += dinero_ingresar
 
-    def transferir(self):
-        dinero_transferir = 200
+    def transferir(self, dinero_transferir):
         if self.puede_retirar_o_transferir(dinero_transferir):
             "Aqui realizaremos la transferencia"
         else:
@@ -84,3 +84,9 @@ class Cuenta_Vip(Plazo_Fijo):
             print ("Su saldo ha alcanzado su valor negativo maximo, {}€".format(self.saldo))
         else:
             pass
+
+    def ingresar_dinero_vip(self, dinero):
+        Cuenta_Bancaria.ingresar(dinero)
+    
+    def transferir_dinero(self, dinero):
+        Cuenta_Bancaria.transferir(dinero)

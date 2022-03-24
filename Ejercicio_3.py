@@ -7,4 +7,12 @@ class Cuenta_Bancaria:
         self.num_cuenta = num_cuenta
         self.saldo = saldo
 
-    
+    def retirar_dinero(self):
+        dinero_retirar = 70
+        self.saldo -= dinero_retirar
+
+    def ingresar_dinero(self):
+        dinero_ingresar = 350
+        self.saldo += dinero_ingresar
+
+    def transferir_dinero(self):
